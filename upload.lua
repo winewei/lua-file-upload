@@ -29,11 +29,16 @@ local filename
 local filelen=0
 local retable = {}
 local code=0
-local file_url = "https://fileupload.join51.com/files/"
+local file_url = "https://fileupload.demo.com/files/"
 local uri_data = os.date("%Y/%m/%d/")
 form:set_timeout(100000)
 --文件后缀名过虑，只允许指定文件后缀名文件上传
-local suffix_filter = "jpg,jpeg,png,gif"
+local suffix_filter = {
+	jpg = 1,
+	jpeg = 1,
+	png = 1,
+	gif = 1
+}
 
 -- 配置文件上传目录,lua 执行用户一定要有写权限, 固定目录:/year/month/day
 local osfilepath = "/data/uploadfiles/files/" .. uri_data
@@ -64,7 +69,7 @@ function get_file_suffix(res)
 	    local st,err = suffix[2]:match(".+%.(%w+)$")
 	    if st then
 		    local s = string.lower(st)
-		    if string.find(suffix_filter,s) then
+		    if suffix_filter[s] then
 			    return file_name_md5 .. "." .. s
 		    else
 			    retable["code"] = 9000
