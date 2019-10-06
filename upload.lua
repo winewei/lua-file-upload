@@ -19,8 +19,12 @@ if "OPTIONS" == request_method then
 	return nil
 end
 -- 加载基础库(第三方)
-local json = require "dkjson"
+local json = require "cjson"
 local upload = require "resty.upload"
+
+local env = io.open("/data/wwwroot/.env",r)
+local config = json.decode(env:read("*all"))
+env:close()
 
 local chunk_size = 4096  --如果不设置默认是4096.
 local form = upload:new(chunk_size)
@@ -29,7 +33,8 @@ local filename
 local filelen=0
 local retable = {}
 local code=0
-local file_url = "https://fileupload.demo.com/files/"
+local file_url = config["UPLOAD_URL"]
+--local file_url = "https://fileupload.demo.com/files/"
 local uri_data = os.date("%Y/%m/%d/")
 form:set_timeout(100000)
 --文件后缀名过虑，只允许指定文件后缀名文件上传
@@ -41,7 +46,8 @@ local suffix_filter = {
 }
 
 -- 配置文件上传目录,lua 执行用户一定要有写权限, 固定目录:/year/month/day
-local osfilepath = "/data/uploadfiles/files/" .. uri_data
+--local osfilepath = "/data/uploadfiles/files/" .. uri_data
+local osfilepath = config["UPLOAD_PATH"] .. uri_data
 
 -- 生成类随机md5文件名,利用系统自带的毫秒级时间戳md5值作文件名
 local file_name_md5 = ngx.md5(ngx.now())

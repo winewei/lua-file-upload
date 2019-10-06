@@ -3,10 +3,16 @@ local uuid = require("resty.uuid")
 local qr = require("qrencode")
 local args = ngx.req.get_uri_args()
 
+local env = io.open("/data/wwwroot/.env",r)
+local config = json.decode(env:read("*all"))
+env:close()
+
 local uri_date = os.date("%Y/%m/%d/")
-local osfilepath = "/data/uploadfiles/files/qrcode/" .. uri_date
+--local osfilepath = "/data/uploadfiles/files/qrcode/" .. uri_date
+local osfilepath = config["QRCODE_PATH"] .. uri_date
 local file_name = uuid.generate() .. ".png"
-local file_url = "http://localhost/files/qrcode/" .. uri_date .. file_name
+---local file_url = "http://localhost/files/qrcode/" .. uri_date .. file_name
+local file_url = config["QRCODE_URL"] .. uri_date .. file_name
 local file_real_path = osfilepath .. file_name
 -- apikeys
 local apiKeys = {
