@@ -1,7 +1,7 @@
 FROM openresty/openresty:1.13.6.2-1-stretch AS installer
 
 RUN apt-get update \
-    && apt-get install git libqrencode-dev libpng-dev gcc -y \
+    && apt-get install git libqrencode-dev libpng-dev gcc make -y \
 	&& git clone https://github.com/openresty/lua-resty-upload.git \
 	&& git clone https://github.com/bungle/lua-resty-uuid.git \
 	&& git clone https://github.com/orangle/lua-resty-qrencode.git \
