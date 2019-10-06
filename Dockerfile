@@ -21,4 +21,7 @@ COPY --from=installer /usr/local/openresty/lualib/qrencode.so /usr/local/openres
 COPY . .
 
 RUN mv default.conf /etc/nginx/conf.d/default.conf \
-    && mkdir -p /data/uploadfiles
+    && mkdir -p /data/uploadfiles \
+	&& apt-get update \
+	&& apt-get install libqrencode-dev libpng-dev -y
+
