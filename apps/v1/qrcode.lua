@@ -4,14 +4,14 @@ local qr = require("qrencode")
 local args = ngx.req.get_uri_args()
 
 local uri_date = os.date("%Y/%m/%d/")
-local osfilepath = "/tmp/files/qrcode/" .. uri_date
+local osfilepath = "/data/uploadfiles/files/qrcode/" .. uri_date
 local file_name = uuid.generate() .. ".png"
 local file_url = "http://localhost/files/qrcode/" .. uri_date .. file_name
 local file_real_path = osfilepath .. file_name
 -- apikeys
 local apiKeys = {
     -- lcb api 1;
-    9iRE0L3294l9DBREQveNBIc = 1,
+    fiRE0L3294l9DBREQveNBIc = 1,
     -- lcb api 2;
     j62h69HrFi1ar6iEc3QI3aM = 1
     }

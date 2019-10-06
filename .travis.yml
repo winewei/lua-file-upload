@@ -12,7 +12,7 @@ script:
 
 before_deploy: |-
     # Generate image tags
-    export build_tag="${DOCKER_REPO}:1.13.6"
+    export build_tag="${DOCKER_REPO}:0.0.${TRAVIS_BUILD_NUMBER}"
 
     # Build docker image
     docker build \
