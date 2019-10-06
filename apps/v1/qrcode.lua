@@ -10,9 +10,9 @@ local file_url = "http://localhost/files/qrcode/" .. uri_date .. file_name
 local file_real_path = osfilepath .. file_name
 -- apikeys
 local apiKeys = {
-	-- lcb api 1;
-	9iRE0L3294l9DBREQveNBIc = 1,
-        -- lcb api 2;
+    -- lcb api 1;
+    9iRE0L3294l9DBREQveNBIc = 1,
+    -- lcb api 2;
     j62h69HrFi1ar6iEc3QI3aM = 1
     }
 -- 检测存储目录是否存在
