@@ -37,9 +37,9 @@ local code=0
 
 local file_url = config["UPLOAD_URL"]
 -- 配置文件上传目录,lua 执行用户一定要有写权限, 固定目录:/year/month/day
+local uri_data = os.date("%Y/%m/%d/")
 local osfilepath = config["UPLOAD_PATH"] .. uri_data
 
-local uri_data = os.date("%Y/%m/%d/")
 form:set_timeout(100000)
 --文件后缀名过虑，只允许指定文件后缀名文件上传
 local suffix_filter = {
