@@ -16,7 +16,7 @@ WORKDIR /data/wwwroot/
 
 COPY --from=installer lua-resty-upload/lib/resty/upload.lua /usr/local/openresty/lualib/resty/upload.lua 
 COPY --from=installer lua-resty-uuid/lib/resty/uuid.lua /usr/local/openresty/lualib/resty/uuid.lua 
-COPY --from=installer lua-resty-quencode/qrencode.so /usr/local/openresty/lualib/qrencode.so
+COPY --from=installer /usr/local/openresty/lualib/qrencode.so /usr/local/openresty/lualib/qrencode.so
 
 COPY . .
 
