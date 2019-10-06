@@ -8,20 +8,12 @@ local config = json.decode(env:read("*all"))
 env:close()
 
 local uri_date = os.date("%Y/%m/%d/")
---local osfilepath = "/data/uploadfiles/files/qrcode/" .. uri_date
 local osfilepath = config["QRCODE_PATH"] .. uri_date
 local file_name = uuid.generate() .. ".png"
----local file_url = "http://localhost/files/qrcode/" .. uri_date .. file_name
 local file_url = config["QRCODE_URL"] .. uri_date .. file_name
 local file_real_path = osfilepath .. file_name
--- apikeys
-local apiKeys = {
-    -- lcb api 1;
-    fiRE0L3294l9DBREQveNBIc = 1,
-    -- lcb api 2;
-    j62h69HrFi1ar6iEc3QI3aM = 1
-    }
--- 检测存储目录是否存在
+local apiKeys = config["QR_KEY"]
+
 local f,err = io.open(osfilepath)
 if not f then
         local ok,err = os.execute("mkdir -p \"" .. osfilepath .. "\"")
