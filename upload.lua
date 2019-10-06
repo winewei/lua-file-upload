@@ -21,6 +21,7 @@ end
 -- 加载基础库(第三方)
 local json = require "cjson"
 local upload = require "resty.upload"
+local uuid = require("resty.uuid")
 
 local env = io.open("/data/wwwroot/.env",r)
 local config = json.decode(env:read("*all"))
@@ -50,7 +51,9 @@ local suffix_filter = {
 
 
 -- 生成类随机md5文件名,利用系统自带的毫秒级时间戳md5值作文件名
-local file_name_md5 = ngx.md5(ngx.now())
+-- local file_name_md5 = ngx.md5(ngx.now())
+local file_name_uuid = uuid.generate()
+
 
 --form:set_timeout(0) -- 1 sec
 
@@ -76,7 +79,7 @@ function get_file_suffix(res)
 	    if st then
 		    local s = string.lower(st)
 		    if suffix_filter[s] then
-			    return file_name_md5 .. "." .. s
+			    return file_name_uuid .. "." .. s
 		    else
 			    retable["code"] = 9000
 			    retable["msg"] = "File is unlawful!"
