@@ -22,6 +22,7 @@ COPY . .
 
 RUN mv default.conf /etc/nginx/conf.d/default.conf \
     && mkdir -p /data/uploadfiles \
+	&& chmod 777 -R /data/uploadfiles \
 	&& apt-get update \
 	&& apt-get install libqrencode-dev libpng-dev -y
 
