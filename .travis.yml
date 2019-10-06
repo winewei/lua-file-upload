@@ -1,0 +1,26 @@
+language: bash
+group: stable
+dist: trusty
+os: linux
+services:
+- docker
+install:
+    - echo "skipping tests"
+
+script:
+    - echo "skipping tests"
+
+before_deploy: |-
+    # Generate image tags
+    export build_tag="${DOCKER_REPO}:1.13.6"
+
+    # Build docker image
+    docker build \
+    -t ${build_tag} \
+    .
+
+deploy:
+- provider: script
+  script:  >-
+    docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
+    && docker push ${build_tag}
